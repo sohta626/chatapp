@@ -1,0 +1,16 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+}
+
+.changed {
+    font-size: 5.0vw;
+    margin-top: 30%;
+}
+
+a {
+    font-size: 4.5vw;
+}

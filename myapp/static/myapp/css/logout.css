@@ -1,0 +1,17 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+}
+.logout_done {
+    font-size: 5vw;
+    margin-top: 30%;
+}
+
+.again {
+    font-size: 4.0vw;
+    margin-top: 20%;
+}
+

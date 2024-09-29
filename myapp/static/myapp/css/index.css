@@ -1,0 +1,30 @@
+html {
+    overflow: hidden;
+}
+
+.index_button {
+    width: 30vw;
+    height: 7.5vw;
+    font-size: 3.5vw;
+    font-weight: 400;
+    line-height: 7.5vw;
+    border: 1.0vw solid gainsboro;
+    border-radius: 3.0vw;
+    text-align: center;
+    margin-bottom: 10vw;
+}
+
+.index_button:hover {
+    background-color:#666666;
+    color: #fff;
+}
+
+.buttons {
+    width: 50vw;
+    transform: translate(33vw, 37.5vh);
+}
+
+a {
+    text-decoration: none;
+    color: #666666;
+}

@@ -1,0 +1,19 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/pass_change.css' %}" />
+    </head>
+    <body>
+        <header>
+            パスワード変更 
+        </header><hr>
+        <form method="POST">
+            {%csrf_token%}
+            <table>
+                {{form.as_table}}
+            </table>
+            <button type="submit">submit</button>
+        </form>

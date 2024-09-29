@@ -1,0 +1,51 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/talk_room.css' %}" />
+    </head>
+    <body>
+        <header>
+            <table>
+                <tr>
+                    <th><a href="{% url 'friends' %}">戻る</a></th>
+                    <th>{{the_other.username}}</th>
+                    <th>
+                        <form method="GET">
+                            <button type="submit">更新</button>
+                        </form>
+                    </th>
+                </tr>
+            </table>
+        </header>
+        <div class="talk_content">
+        {% for log in talk_content %}
+            <div class="message">
+                <div class="icon_name">
+                    <div>
+                        <img src="{{log.sender.img.url}}" alt="無" height="110%" width="auto">
+                    </div>
+                    {{log.sender.username}}
+                </div>
+                <div class="message_time">
+                    <div class="one_message">
+                        {{log.message}}
+                    </div>
+                    <div class="send_time">
+                        {{log.send_time}}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <footer> 
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="text" name="message">
+                <button type="submit" class="submit">送信</button>    
+            </form>  
+        </footer>
+    </body>
+</html>

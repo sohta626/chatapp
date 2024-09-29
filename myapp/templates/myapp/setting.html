@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/setting.css'%}" />
+    </head>
+    <body>
+    <header>
+        設定
+    </header><hr>
+        <a href="{% url 'name_change' request.user.id %}">ユーザーネーム変更</a><br>
+        <a href="{% url 'email_change' request.user.id %}">メールアドレス変更</a><br> 
+        <a href="{% url 'icon_change' request.user.id %}">アイコン変更</a><br>
+        <a href="{% url 'pass_change' %}">パス変更</a><br>
+        <a href="{% url 'logout_view' %}">ログアウト</a><br>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-container__item">
+                <a href="{% url 'friends' %}" class="footer-item__link">
+                    <span class="footer-item__icon"><img src="{% static 'myapp/img/people-24px.svg' %}" width="40%"></span>
+                    <br>
+                    <span class="footer-item__text">フレンド</span>
+                </a>
+            </div>
+            <div class="footer-container__item">
+                <a href="{% url 'setting' %}" class="footer-item__link">
+                    <span class="footer-item__icon"><img src="{% static 'myapp/img/settings-black-18dp.svg' %}" width="40%"></span>
+                    <br>
+                    <span class="footer-item__text">設定</span>
+                </a>
+            </div>
+        </div>     
+    </footer>
+    </body>
+</html>

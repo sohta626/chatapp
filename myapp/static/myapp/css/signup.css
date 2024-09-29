@@ -1,0 +1,33 @@
+* {
+    font-size: 4.0vw;
+    overflow: hidden;
+}
+
+header {
+    text-align: center;
+    font-size: 5.0vw;
+}
+
+table {
+    margin: 10vw auto 0 auto;
+    height: 60vw;
+}
+
+th {
+    text-align: left;
+}
+
+input:not([type="file"]) {
+    border: 0.50vw solid #999999;
+    border-radius: 1.5vw;
+    width: 50vw;
+}
+
+.sign_up_button {
+    margin: 5vw auto 0 auto;
+    text-align: center;
+}
+
+.helptext {
+    display: none;
+}

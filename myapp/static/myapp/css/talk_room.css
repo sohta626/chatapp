@@ -1,0 +1,95 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    background-color: #ececec;
+    height: 100vh;
+}
+
+header {
+    font-size: 2.5vh; 
+    height: 8vh;
+    text-align: center;
+}
+
+table {
+    width: 100vw;
+    height: 8vh;
+}
+
+.talk_content {
+    background-color: #fff;
+    width: 101vw;
+    height: 85vh;
+    border-top: 0.2vh solid #666;
+    border-bottom: 0.2vh solid #666;
+    transform: translate(-1.8vw, 0);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.message {
+    border-bottom: 0.2vh solid #999;
+    height:fit-content;
+    display: flex;
+}
+
+.icon_name {
+    width: 5.0vh;
+    margin: 0.5vh 0 0 0.5vh;
+    font-size: 2.0vh;
+}
+
+img {
+    height: 5.0vh;
+    width: 5.0vh;
+    border-radius: 50%;
+    border: #000 solid 0.3vh;
+}
+
+
+.message_time {
+    width: 75vw;
+    height: fit-content;
+    margin-left: 5.0vw;
+}
+
+.one_message {
+    width: 75vw;
+    height: fit-content;
+}
+
+
+.send_time {
+    color: #999;
+    font-size: 1.0vh;
+    
+}
+
+footer {
+    height: 7vh;
+}
+
+form {
+    display: flex;
+}
+
+input {
+    width: 80vw;
+    height: 3vh;
+    border: #000 solid 0.25vh;
+    border-radius: 1.5vh;
+    margin: 1.5vh 0 2.5vh 0;
+    font-size: 2.5vh;
+}
+
+
+.submit {
+    width: 12.5vw;
+    height: 3.5vh;
+    border: #000 solid 0.25vh;
+    border-radius: 1.5vh;
+    transform: translate(2.0vw, 1.5vh);
+    font-size: 1.5vh;
+}

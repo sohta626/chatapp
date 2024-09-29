@@ -1,0 +1,66 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/friends.css' %}" />
+    </head>
+    <body>
+        <header>
+            フレンド
+        </header>
+        <div class="friends_list">
+            {% for user in talking_user%}
+                {% if user != request.user %}
+                    <a href="{% url 'talk_room' you.id user.id%}" class="friend">
+                        <div class="profile_img">
+                            <img src="{{user.img.url}}" alt="無" height="110%" width="auto">
+                        </div>
+                        <div class="username">
+                            {{user.username}}
+                        </div>
+                        <div class="newest_log">
+                            {% for log in newest_log %}
+                                {% if log.recipient == user and log.sender == request.user or log.recipient == request.user and log.sender == user %}
+                                    {{log.message}}<br>
+                                    {{log.send_time}}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </a>
+                {% endif %}
+            {% endfor %}
+            {% for user in not_talking%}
+                {% if user != request.user %}
+                <a href="{% url 'talk_room' you.id user.id %}" class="friend">
+                    <div class="profile_img">
+                        <img src="{{user.img.url}}" alt="無" height="110%" width="auto">
+                    </div>
+                    <div class="username">
+                        {{user.username}}
+                    </div>
+                </a>
+                {% endif%}
+            {% endfor %}
+        </div>
+        <footer> 
+            <div class="footer-container">
+                <div class="footer-container__item">
+                    <a href="{% url 'friends' %}" class="footer-item__link">
+                        <span class="footer-item__icon"><img src="{% static 'myapp/img/people-24px.svg' %}" width="40%"></span>
+                        <br>
+                        <span class="footer-item__text">フレンド</span>
+                    </a>
+                </div>
+                <div class="footer-container__item">
+                    <a href="{% url 'setting' %}" class="footer-item__link">
+                        <span class="footer-item__icon"><img src="{% static 'myapp/img/settings-black-18dp.svg' %}" width="40%"></span>
+                        <br>
+                        <span class="footer-item__text">設定</span>
+                    </a>
+                </div>
+            </div>     
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+html {
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+}
+
+header {
+    text-align: center;
+    font-size: 5.0vw
+}
+
+table {
+    width: 90vw;
+    padding-top: 5vh;
+    padding-bottom: 2.5vh;
+    margin-left: 0;
+}
+
+tr {
+    height: 4.5vh;
+}
+
+.helptext {
+    display: none;
+}

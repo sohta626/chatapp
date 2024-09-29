@@ -1,0 +1,20 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/logout.css' %}" />
+    </head>
+    <body>
+        <div class="logout_done">
+            ログアウトしました。
+        </div>
+        <div class="again">
+            ログイン・会員登録をする場合は<br>下のページにお進みください。<br>
+            <p>
+                <a href="{% url 'index' %}">ログイン・会員登録を行う</a>
+            </p>
+        </div>
+    </body>
+</html>
