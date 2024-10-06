@@ -2,6 +2,7 @@ from typing import Any
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User, Talk
 from django import forms
+from allauth.account.forms import SignupForm
 
 
 class UserModelForm(UserCreationForm):
@@ -26,3 +27,12 @@ class UserLoginForm(AuthenticationForm):
         "username":"Username",
         "password":"Password"
     }
+
+class MySignupForm(SignupForm):
+    image = forms.ImageField()
+    
+    def signup(self, request, user):
+        user.img = self.cleaned_data['image']
+        user.save()
+        return user
+

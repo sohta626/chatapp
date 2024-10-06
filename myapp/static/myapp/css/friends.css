@@ -15,11 +15,26 @@ header {
 .friends_list {
     background-color: #fff;
     width: 101vw;
-    height: 80vh;
+    height: 79vh;
     border-top: 0.2vh solid #666;
     border-bottom: 0.2vh solid #666;
     transform: translate(-1.8vw, 0);
     overflow-y: scroll;
+}
+
+.name_search {
+    border-bottom: 0.2vh solid #999;
+    height:5.0vh;
+    text-align: center;
+}
+
+.search_text {
+    height: 2.5vh;
+    width: 60vw;
+    border: #777 solid 0.35vh;
+    border-radius: 1.5vh;
+    margin-top: 1.0vh;
+    font-size: 2.0vh;
 }
 
 .friend {
@@ -77,8 +92,6 @@ a {
 }
 
 footer {
-    text-align: center;
-    bottom: 0;   
+    text-align: center;  
     font-size: 2.0vh;
 }
-

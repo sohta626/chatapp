@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'myapp',
+    'accounts.apps.AccountsConfig',#allauth
+
+    'django.contrib.sites', #
+    'allauth',              #
+    'allauth.account',      #
 ]
 
 MIDDLEWARE = [
@@ -50,7 +56,37 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',#allauth
 ]
+
+SITE_ID = 1 #allauth
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend', #
+    'django.contrib.auth.backends.ModelBackend',            #
+)
+#allauth
+# ユーザー認証にメールアドレスを使用
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+# ユーザー登録にメールアドレスを必須にする
+ACCOUNT_EMAIL_REQUIRED = True
+# ユーザー名の登録を不要にする
+ACCOUNT_USERNAME_REQUIRED = False
+# 登録後、メールアドレスに確認メールが送信される
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+LOGIN_REDIRECT_URL = 'friends'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'logout_view2'
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'#開発環境でのみ使えるやつ
+
+
+ACCOUNT_FORMS = {
+    'signup': 'myapp.forms.MySignupForm',
+}
+#allauth
 
 ROOT_URLCONF = 'intern.urls'
 
@@ -76,10 +112,22 @@ WSGI_APPLICATION = 'intern.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'chatapp',
+        'USER': 'nsohta',
+        'PASSWORD': 'thisistest',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

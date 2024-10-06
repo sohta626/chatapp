@@ -39,18 +39,23 @@ def friends_next(request):
     newest_log=[]
     not_talking=[]
     for account in User.objects.all():
-       if Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).exists():
-           talking_user.append(account)
-           newest = Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).order_by('-send_time').first()
-           newest_log.append(newest)
+        if Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).exists():
+            talking_user.append(account)
+            newest = Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).order_by('-send_time').first()
+            newest_log.append(newest)
 
-       else:
-           not_talking.append(account)
-           
+        else:
+            not_talking.append(account)
+
+    if request.method == 'POST':
+        name_search = request.POST.get("name_search") 
+        talking_user = [account for account in talking_user if name_search in account.username]
+        not_talking = [account for account in not_talking if name_search in account.username]
+
     context = {'you':request.user,
-               'talking_user':talking_user,
-               'newest_log':newest_log,
-               'not_talking':not_talking}
+            'talking_user':talking_user,
+            'newest_log':newest_log,
+            'not_talking':not_talking}
     return render(request, "myapp/friends.html", context)
 
 def talk_room(request, your_id, the_other_id):
