@@ -35,4 +35,4 @@ class MySignupForm(SignupForm):
         user.img = self.cleaned_data['image']
         user.save()
         return user
-
+    

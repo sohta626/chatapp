@@ -11,11 +11,14 @@
             フレンド
         </header>
         <div class="friends_list">
-            <form method="POST" class="name_search">
+            <div>
+            <form method="POST" class="search">
                 {%csrf_token%}
-                <input type="text" name="name_search" class="search_text">
+                <input type="search" name="name_search" class="search_text" placeholder="名前検索">
+                <input type="search" name="email_search" class="search_text" placeholder="メールアドレス検索">
                 <button type="submit">検索</button>
             </form>
+            </div>
             {% for user in talking_user%}
                 {% if user != request.user %}
                     <a href="{% url 'talk_room' you.id user.id%}" class="friend">

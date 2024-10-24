@@ -2,7 +2,7 @@ from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from .models import User, Talk
 from .forms import UserModelForm, UserLoginForm
 from django.views.generic.edit import CreateView, UpdateView
@@ -38,19 +38,41 @@ def friends_next(request):
     talking_user=[]
     newest_log=[]
     not_talking=[]
-    for account in User.objects.all():
-        if Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).exists():
+
+    users = User.objects.all().prefetch_related(
+    Prefetch('sent',
+              queryset=Talk.objects.filter(Q(recipient=request.user)).order_by("-send_time").select_related('sender', 'recipient'),
+              to_attr='sent_talks'),
+    Prefetch('received',
+              queryset=Talk.objects.filter(Q(sender=request.user)).order_by("-send_time").select_related('sender', 'recipient'),
+              to_attr='received_talks')
+    )
+
+    for account in users: 
+        if account.sent_talks and account.received_talks:
+            newest=account.sent_talks[0] if account.sent_talks[0].send_time > account.received_talks[0].send_time else account.received_talks[0]
             talking_user.append(account)
-            newest = Talk.objects.filter(Q(sender=request.user, recipient=account)|Q(sender=account, recipient=request.user)).order_by('-send_time').first()
             newest_log.append(newest)
 
+        elif account.sent_talks:
+            newest=account.sent_talks[0]
+            talking_user.append(account)
+            newest_log.append(newest)
+
+        elif account.received_talks:
+            newest=account.received_talks[0]
+            talking_user.append(account)
+            newest_log.append(newest)
+            
         else:
             not_talking.append(account)
 
+
     if request.method == 'POST':
         name_search = request.POST.get("name_search") 
-        talking_user = [account for account in talking_user if name_search in account.username]
-        not_talking = [account for account in not_talking if name_search in account.username]
+        email_search = request.POST.get("email_search")
+        talking_user = [account for account in talking_user if name_search in account.username and email_search in account.email]
+        not_talking = [account for account in not_talking if name_search in account.username and email_search in account.email]
 
     context = {'you':request.user,
             'talking_user':talking_user,
@@ -68,7 +90,7 @@ def talk_room(request, your_id, the_other_id):
         talk_log = Talk(sender=_sender, recipient=_recipient, message=_message, send_time=_send_time)
         talk_log.save()
 
-    talk_content = Talk.objects.filter(Q(sender=_sender, recipient=_recipient)|Q(sender=_recipient, recipient=_sender)).order_by('send_time')
+    talk_content = Talk.objects.filter(Q(sender=_sender, recipient=_recipient)|Q(sender=_recipient, recipient=_sender)).select_related("sender").order_by('send_time')
 
     context = {'the_other':User.objects.get(id=the_other_id),
                'you':request.user,

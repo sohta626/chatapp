@@ -22,10 +22,10 @@ header {
     overflow-y: scroll;
 }
 
-.name_search {
+.search {
     border-bottom: 0.2vh solid #999;
-    height:5.0vh;
-    text-align: center;
+    text-align: left;
+    padding-left: 10vw;
 }
 
 .search_text {

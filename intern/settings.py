@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sites', #
     'allauth',              #
     'allauth.account',      #
+
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'allauth.account.middleware.AccountMiddleware',#allauth
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 SITE_ID = 1 #allauth
@@ -193,3 +197,6 @@ if os.path.isfile('.env'): # .envファイルが存在しない時にもエラ�
 
     DEBUG = env('DEBUG')
     ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+
+INTERNAL_IPS = ['127.0.0.1']
+
